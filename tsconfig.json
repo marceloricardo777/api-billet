@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "./src/@types",
+      "node_modules/@types"
+    ],
+    "baseUrl": "./src",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false
+  }
+}
