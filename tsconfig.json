@@ -20,5 +20,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strictPropertyInitialization": false
-  }
+  },
+  "exclude": ["./__tests__/*","./jest.config.ts","dist"]
 }

@@ -1,0 +1,30 @@
+
+name: Deploy AWS
+ 
+on:
+ push:
+   branches: [ main ]
+ pull_request:
+   branches: [ main ]
+ 
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   strategy:
+     matrix:
+       node-version: [10.x]
+   steps:
+   - uses: actions/checkout@v2
+   - name: Use Node.js ${{ matrix.node-version }}
+     uses: actions/setup-node@v1
+     with:
+       node-version: ${{ matrix.node-version }}
+   - run: yarn install
+   - run: yarn build
+   - name: serverless deploy s3
+     uses: serverless/github-action@master
+     with:
+       args: client deploy --no-confirm
+     env:
+       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}

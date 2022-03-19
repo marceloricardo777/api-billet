@@ -16,7 +16,7 @@
     "query-string": "^7.0.1",
     "uuidv4": "^6.2.10"
   },
-  "scripts": {
+    "scripts": {
     "dev": "ts-node-dev  src/server.ts",
     "build": "tsc",
     "test": "jest --testTimeout=10000"
