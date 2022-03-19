@@ -1,3 +1,4 @@
+import format from 'date-fns/format';
 export default class HelperCalculations{
     CalculateDACModule10(field:string):number {
         const sum = field.split('').reverse().reduce((acc, item, i) => {
@@ -38,7 +39,8 @@ export default class HelperCalculations{
     
     expirationFactor(days:string):string {
         const dataBaseBC = new Date('1997-10-07').getTime();
-        return new Date(dataBaseBC + (+days+1) * 24 * 3600000).toLocaleDateString("pt-BR");
+return format(new Date(dataBaseBC + (+Number(days)+1) * 24 * 3600000),'yyyy-MM-dd');
+
     }
     
 }

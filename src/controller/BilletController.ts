@@ -1,13 +1,15 @@
 import { Request } from "express";
 import Calculations from '../helper/HelperCalculations'
+import Currency from '../helper/HelperCurrency'
 interface Billet {
     expirationDate:string,
     barCode: string,
     amount: string
 }
 export class BilletController {
-    async run(request: Request): Promise<Billet> {
+     run(request: Request): Billet {
     const calculations = new Calculations()
+    const currency = new Currency()
     const numBillet = request.params.numBillet;
     const infBillet = {
         expirationDate:'',
@@ -41,40 +43,33 @@ export class BilletController {
 
     if (typeBillet === 'B') {
         fieldA = line.substring(0, 9);
-        fieldB = line.substring(10, 10);
-        fieldC = line.substring(21, 10);
+        fieldB = line.substring(10, 20);
+        fieldC = line.substring(21, 31);
         fieldD = line.substring(33);
-        digitA = Number(line.substring(9, 1));
-        digitB = Number(line.substring(20, 1));
-        digitC = Number(line.substring(31, 1));
-        digitG = Number(line.substring(32, 1));
+        digitA = Number(line.substring(9, 10));
+        digitB = Number(line.substring(20, 21));
+        digitC = Number(line.substring(31, 32));
+        digitG = Number(line.substring(32, 33));
         barCode = line.substring(0, 4) + digitG +
             fieldD + fieldA.slice(4) + fieldB + fieldC;
 
-        if (Number(barCode.substring(4, 11)) != 0) {
-            infBillet.expirationDate= calculations.expirationFactor(fieldD.substring(0, 4));
-        }
-        if (fieldD.substring(4, 8) + '.' + fieldD.substring(9)) {
-            infBillet.amount = 'R$ ' + +fieldD.substring(4, 8) + ',' + fieldD.substring(12);
-        }
+        infBillet.expirationDate= calculations.expirationFactor(fieldD.substring(0, 4));
+        infBillet.amount  = currency.convertCurrency(fieldD.substring(10));
     } else if (typeBillet === 'C') {
         fieldA = line.substring(0, 11);
-        fieldB = line.substring(12, 11);
-        fieldC = line.substring(24, 11);
-        fieldD = line.substring(36, 11);
-        digitA = Number(line.substring(11, 1));
-        digitB = Number(line.substring(23, 1));
-        digitC = Number(line.substring(35, 1));
-         digitD = Number(line.substring(47, 1));
-        digitG = Number(line.substring(3, 1));
+        fieldB = line.substring(12, 23);
+        fieldC = line.substring(24, 35);
+        fieldD = line.substring(36);
+        digitA = Number(line.substring(11));
+        digitB = Number(line.substring(23));
+        digitC = Number(line.substring(35));
+         digitD = Number(line.substring(47));
+        digitG = Number(line.substring(3));
         barCode = fieldA + fieldB + fieldC + fieldD;
 
-        if (Number(fieldD.substring(0, 4)) != 0) {
-            infBillet.expirationDate = calculations.expirationFactor(fieldD.substring(0, 4));
-        }
-        if (fieldD.substring(4, 8) + '.' + fieldD.substring(9)) {
-            infBillet.amount  = 'R$ ' + +barCode.substring(4, 9) + ',' + barCode.substring(13, 2);
-        }
+        infBillet.expirationDate = calculations.expirationFactor(fieldD.substring(0, 4));
+        
+        infBillet.amount  =  currency.convertCurrency(fieldD.substring(8));
     }
     
     if (digitA != calculations.CalculateDACModule10(fieldA) ||
