@@ -7,13 +7,11 @@ export function errorHandling(err: Error, request: Request, response: Response, 
         return response.status(400).json(
             {
                 message: err.message,
-                status: "error"
             }
         );
     }
     next;
     return response.status(500).json({
-        status: "error",
         message: "Internal Server Error"
     });
     
