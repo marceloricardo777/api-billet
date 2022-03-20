@@ -14,6 +14,7 @@ describe('GET BILLET', () => {
             amount: "20.00"
     }
     const lineInvalid = '00190500954014481606906809350314337370000000100000'
+    const lineInvalid2 = '0019050095401448160690680935031a4337370000000100000'
   it('return status 200 and billet data of typeable line with 47 digits', async()=>{
     const res = await request(app).get(`/boleto/${lineValid47}`).send()
     expect(res.statusCode).toEqual(200);
@@ -34,5 +35,12 @@ describe('GET BILLET', () => {
     });
 
   })
- 
+  it('return status 400 invalid typed line if it has characters other than numbers', async()=>{
+    const res = await request(app).get(`/boleto/${lineInvalid2}`).send()
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toEqual({
+        message: "Only numbers on the entered line are accepted",
+    });
+
+  })
 });

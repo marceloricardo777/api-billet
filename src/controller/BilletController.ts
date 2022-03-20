@@ -17,12 +17,12 @@ export class BilletController {
         amount: ''
     };
 
-    const line = numBillet.replace(/[^0-9]/g, '');
+    if(numBillet.match(/[^0-9]/g))  throw new Error("Only numbers on the entered line are accepted");
     let typeBillet = '';
 
-    if (line.length === 47) {
+    if (numBillet.length === 47) {
         typeBillet = 'B';
-    } else if (line.length === 48) {
+    } else if (numBillet.length === 48) {
         typeBillet = 'C';
     }
 
@@ -42,29 +42,29 @@ export class BilletController {
     let barCode = '';
 
     if (typeBillet === 'B') {
-        fieldA = line.substring(0, 9);
-        fieldB = line.substring(10, 20);
-        fieldC = line.substring(21, 31);
-        fieldD = line.substring(33);
-        digitA = Number(line.substring(9, 10));
-        digitB = Number(line.substring(20, 21));
-        digitC = Number(line.substring(31, 32));
-        digitG = Number(line.substring(32, 33));
-        barCode = line.substring(0, 4) + digitG +
+        fieldA = numBillet.substring(0, 9);
+        fieldB = numBillet.substring(10, 20);
+        fieldC = numBillet.substring(21, 31);
+        fieldD = numBillet.substring(33);
+        digitA = Number(numBillet.substring(9, 10));
+        digitB = Number(numBillet.substring(20, 21));
+        digitC = Number(numBillet.substring(31, 32));
+        digitG = Number(numBillet.substring(32, 33));
+        barCode = numBillet.substring(0, 4) + digitG +
             fieldD + fieldA.slice(4) + fieldB + fieldC;
 
         infBillet.expirationDate= calculations.expirationFactor(fieldD.substring(0, 4));
         infBillet.amount  = currency.convertCurrency(fieldD.substring(8));
     } else if (typeBillet === 'C') {
-        fieldA = line.substring(0, 11);
-        fieldB = line.substring(12, 23);
-        fieldC = line.substring(24, 35);
-        fieldD = line.substring(36);
-        digitA = Number(line.substring(11));
-        digitB = Number(line.substring(23));
-        digitC = Number(line.substring(35));
-         digitD = Number(line.substring(47));
-        digitG = Number(line.substring(3));
+        fieldA = numBillet.substring(0, 11);
+        fieldB = numBillet.substring(12, 23);
+        fieldC = numBillet.substring(24, 35);
+        fieldD = numBillet.substring(36);
+        digitA = Number(numBillet.substring(11));
+        digitB = Number(numBillet.substring(23));
+        digitC = Number(numBillet.substring(35));
+         digitD = Number(numBillet.substring(47));
+        digitG = Number(numBillet.substring(3));
         barCode = fieldA + fieldB + fieldC + fieldD;
 
         infBillet.expirationDate = calculations.expirationFactor(fieldD.substring(0, 4));
@@ -75,7 +75,7 @@ export class BilletController {
     if (digitA != calculations.CalculateDACModule10(fieldA) ||
         digitB != calculations.CalculateDACModule10(fieldB) ||
         digitC != calculations.CalculateDACModule10(fieldC) ||
-        (typeBillet === 'B' && digitG != calculations.CalculateDACModule11(line.substring(0, 4) +
+        (typeBillet === 'B' && digitG != calculations.CalculateDACModule11(numBillet.substring(0, 4) +
             fieldD + fieldA.slice(4) + fieldB + fieldC))) {
         throw new Error("Invalid billet number.");
         
