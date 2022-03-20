@@ -54,7 +54,7 @@ export class BilletController {
             fieldD + fieldA.slice(4) + fieldB + fieldC;
 
         infBillet.expirationDate= calculations.expirationFactor(fieldD.substring(0, 4));
-        infBillet.amount  = currency.convertCurrency(fieldD.substring(10));
+        infBillet.amount  = currency.convertCurrency(fieldD.substring(8));
     } else if (typeBillet === 'C') {
         fieldA = line.substring(0, 11);
         fieldB = line.substring(12, 23);
