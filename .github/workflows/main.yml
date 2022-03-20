@@ -27,7 +27,10 @@ jobs:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
       aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
       aws-region: us-east-1
-      script: |
+   - name: Login AWS 
+     uses: aws-actions/amazon-ecr-login@v1
+   - name: Buil and restart PM@
+     run: |
             cd ~/api-billet
             git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
             npm install
