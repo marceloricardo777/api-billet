@@ -31,8 +31,6 @@ jobs:
      uses: aws-actions/amazon-ecr-login@v1
    - name: Buil and restart PM@
      run: |
-            ls
-            cd ~/api-billet
             git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
             npm install
             npm run build
