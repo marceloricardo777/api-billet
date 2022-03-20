@@ -1,0 +1,75 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "API BILLET",
+      "description": "Typed row reading API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Billet",
+        "description": "Typed row reading API"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/boleto/{numBillet}": {
+        "get": {
+          "tags": [
+            "Billet"
+          ],
+          "description": "Capture data through the typed line",
+          "parameters": [
+            {
+              "name": "numBillet",
+              "in": "path",
+              "required": true,
+              "description": "ID of user that we want to find",
+              "type": "integer"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Return of captured data",
+              "schema": {
+                "type": "object",
+            "properties":{
+              "expirationDate":{
+                "type": "string",
+                "description": "Expiry date"
+              },
+              "barCode":{
+                "type": "string",
+                "description": "Billet bar code"
+              },
+              "amount":{
+                "type": "string",
+                "description": "Billet value"
+              }
+               
+            }
+              }
+            }
+          }
+        } 
+      }
+    }
+   
+  }
