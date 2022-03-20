@@ -18,7 +18,8 @@
       }
     ],
     "schemes": [
-      "http"
+      "http",
+      "https"
     ],
     "consumes": [
       "application/json"
@@ -66,10 +67,22 @@
                
             }
               }
+            },
+            "400": {
+              "description": "API return when errors happen",
+              "schema": {
+                "type": "object",
+            "properties":{
+              "message":{
+                "type": "string",
+                "description": "Message error"
+               
+            }
+              }
             }
           }
         } 
       }
     }
    
-  }
+  }}
