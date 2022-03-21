@@ -21,10 +21,10 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-          script: |
-            git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
-            npm install
-            npm run test
-            npm run build
-            pm2 restart server
+        run: |
+          git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
+          npm install
+          npm run test
+          npm run build
+          pm2 restart server
     
