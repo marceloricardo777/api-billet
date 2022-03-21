@@ -1,6 +1,5 @@
 name: Deploy AWS
 
-# Trigger deployment only on push to master branch
 on:
   push:
     branches:
@@ -8,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to EC2 on main branch push
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +21,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-          run: |
+          script: |
             git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
             npm install
             npm run test
