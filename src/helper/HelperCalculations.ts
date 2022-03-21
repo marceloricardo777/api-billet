@@ -1,3 +1,4 @@
+import { addDays, parse } from 'date-fns';
 import format from 'date-fns/format';
 export default class HelperCalculations{
     CalculateDACModule10(field:string):number {
@@ -39,9 +40,8 @@ export default class HelperCalculations{
     
     expirationFactor(days:string):string {
         if (Number(days.substring(0, 4)).toString().length < 4 ) return ''
-        const dataBaseBC = new Date('1997-10-07').getTime();
-return format(new Date(dataBaseBC + (+Number(days)+1) * 24 * 3600000),'yyyy-MM-dd');
-
+        const baseDateBC = parse('1997-10-07', 'yyyy-MM-dd', new Date());
+        return format(addDays(baseDateBC, +days), 'yyyy-MM-dd')
     }
     
 }
