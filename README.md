@@ -1,7 +1,6 @@
 # REST API Billet
 
-This is a bare-bones example of a Sinatra application providing a REST
-API to a DataMapper-backed model.
+API to capture data through the bilet typed line
 
 ## Install
 
