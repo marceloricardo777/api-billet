@@ -17,6 +17,9 @@ API to capture data through the bilet typed line
 
    yarn build
 
+## Documentation
+
+    Documentation can be viewed via the /doc route
 ### Request
 
 `GET /boleto/:numBillet`
@@ -42,9 +45,9 @@ API to capture data through the bilet typed line
 ## Invalid typed line if it has characters other than numbers
 ### Response
 
-    HTTP/1.1 400 OK
+    HTTP/1.1 400
     Date: Thu, 21 Mar 2022 12:36:30 GMT
-    Status: 400 OK
+    Status: 400
     Connection: close
     Content-Type: application/json
     Content-Length: 2
@@ -55,9 +58,9 @@ API to capture data through the bilet typed line
 ## Invalid typed line
 ### Response
 
-    HTTP/1.1 400 OK
+    HTTP/1.1 400
     Date: Thu, 21 Mar 2022 12:36:30 GMT
-    Status: 400 OK
+    Status: 400
     Connection: close
     Content-Type: application/json
     Content-Length: 2
