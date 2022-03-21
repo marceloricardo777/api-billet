@@ -4,41 +4,21 @@ on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Install Node.js
-        uses: actions/setup-node@v1
+      - name: SSH and deploy node app
+        uses: appleboy/ssh-action@master
         with:
-          node-version: '10.x'
-      - name: Local Project
-        run:  cd ~/api-billet
-      - name: Update files
-        run: git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
-      - name: Install npm dependencies
-        run: npm install
-      - name: Test
-        run: npm run test --if-present
-      - name: Run build task
-        run: npm run build --if-present
-      - name: Restart pm2
-        run: pm2 restart server
-      - name: Deploy to Server 
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
-        # with:
-        #   script: |
-        #     git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
-        #     npm install
-        #     npm run test
-        #     npm run build
-        #     pm2 restart server
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 8080
+          script: |
+            git pull https://${{ secrets.SSH_KEY_GIT }}:x-oauth-basic@github.com/marceloricardo777/api-billet.git main
+            npm install
+            npm run test
+            npm run build
+            pm2 restart server
     
