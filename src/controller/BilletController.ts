@@ -59,17 +59,15 @@ export class BilletController {
         fieldA = numBillet.substring(0, 11);
         fieldB = numBillet.substring(12, 23);
         fieldC = numBillet.substring(24, 35);
-        fieldD = numBillet.substring(36);
-        digitA = Number(numBillet.substring(11));
-        digitB = Number(numBillet.substring(23));
-        digitC = Number(numBillet.substring(35));
-         digitD = Number(numBillet.substring(47));
-        digitG = Number(numBillet.substring(3));
+        fieldD = numBillet.substring(36,47);
+        digitA = Number(numBillet.substring(11,12));
+        digitB = Number(numBillet.substring(23,24));
+        digitC = Number(numBillet.substring(35,36));
+         digitD = Number(numBillet.substring(47,48));
+        digitG = Number(numBillet.substring(3,4));
         barCode = fieldA + fieldB + fieldC + fieldD;
-
         infBillet.expirationDate = calculations.expirationFactor(fieldD.substring(0, 4));
-        
-        infBillet.amount  =  currency.convertCurrency(fieldD.substring(8));
+        infBillet.amount  =  currency.convertCurrency(barCode.substring(4,15));
     }
     
     if (digitA != calculations.CalculateDACModule10(fieldA) ||

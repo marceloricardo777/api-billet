@@ -38,6 +38,7 @@ export default class HelperCalculations{
     }
     
     expirationFactor(days:string):string {
+        if (Number(days.substring(0, 4)).toString().length < 4 ) return ''
         const dataBaseBC = new Date('1997-10-07').getTime();
 return format(new Date(dataBaseBC + (+Number(days)+1) * 24 * 3600000),'yyyy-MM-dd');
 

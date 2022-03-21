@@ -1,5 +1,6 @@
-import {app} from '../src/app';
+import {app} from '../../src/app';
 import request from 'supertest'
+
 describe('GET BILLET', () => {
     const lineValid47 = '00190500954014481606906809350314337370000000100'
     const reslineValid47 = {
@@ -7,12 +8,12 @@ describe('GET BILLET', () => {
         barCode: "00193373700000001000500940144816060680935031",
         amount: "1.00"
     }
-    const lineValid48 = "21290001192110001210904475617405975870000002000";
+    const lineValid48 = "846700000017435900240209024050002435842210108119";
     const reslineValid48 = {
-            expirationDate: "2018-07-16",
-            barCode: "21299758700000020000001121100012100447561740",
-            amount: "20.00"
-    }
+      expirationDate: "2020-10-28",
+      barCode: "84670000001435900240200240500024384221010811",
+      amount: "143.59"
+  }
     const lineInvalid = '00190500954014481606906809350314337370000000100000'
     const lineInvalid2 = '0019050095401448160690680935031a4337370000000100000'
   it('return status 200 and billet data of typeable line with 47 digits', async()=>{
