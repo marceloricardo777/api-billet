@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "ts-node-dev  src/server.ts",
     "build": "tsc",
-    "test": "jest --testTimeout=10000"
+    "test": "jest --testTimeout=20000"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
