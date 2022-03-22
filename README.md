@@ -16,7 +16,8 @@ API to capture data through the bilet typed line
 ## Build app
 
    yarn build
-
+## Url Production
+    http://ec2-52-90-128-227.compute-1.amazonaws.com:7777
 ## Documentation
 
     Documentation can be viewed via the /doc route
